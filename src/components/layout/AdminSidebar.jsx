@@ -1,7 +1,6 @@
-import { ArrowDownToLine, ChartBar, ClipboardPen, Warehouse } from 'lucide-react'
+import { ArrowDownToLine, ChartBar, ClipboardPen } from 'lucide-react'
 import { NavLink } from 'react-router-dom'
 import { IconCombuMark } from '../CombuLogo'
-import { IconTank } from '../icons/NavIcons'
 import { useAdminLayout } from '../../context/AdminLayoutContext'
 import { brandLogoSmClass, brandNavActiveClass } from '../../utils/brandUi'
 
@@ -16,8 +15,6 @@ const navItems = [
     icon: <ArrowDownToLine {...navIconProps} />,
   },
   { to: '/admin/consumos', label: 'Consumos', icon: <ClipboardPen {...navIconProps} /> },
-  { to: '/admin/hangares', label: 'Hangares', icon: <Warehouse {...navIconProps} /> },
-  { to: '/admin/tanques', label: 'Tanques', icon: <IconTank className={navIconClass} /> },
 ]
 
 export default function AdminSidebar() {

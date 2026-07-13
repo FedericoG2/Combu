@@ -6,8 +6,6 @@ import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import AbastecimientosPage from './pages/AbastecimientosPage'
 import DespachosPage from './pages/DespachosPage'
-import HangaresPage from './pages/HangaresPage'
-import TanquesPage from './pages/TanquesPage'
 import CargaCombustiblePage from './pages/public/CargaCombustiblePage'
 
 export default function App() {
@@ -28,8 +26,6 @@ export default function App() {
             <Route index element={<DashboardPage />} />
             <Route path="abastecimientos" element={<AbastecimientosPage />} />
             <Route path="consumos" element={<DespachosPage />} />
-            <Route path="hangares" element={<HangaresPage />} />
-            <Route path="tanques" element={<TanquesPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/admin" replace />} />
         </Routes>
