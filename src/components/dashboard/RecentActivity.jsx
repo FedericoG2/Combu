@@ -63,10 +63,7 @@ export default function RecentActivity({ consumos, abastecimientos, tanqueNombre
   return (
     <Card className="overflow-hidden p-0 shadow-md shadow-slate-200/50">
       <div className="border-b border-slate-100 px-5 py-4 sm:px-6">
-        <h2 className="text-base font-bold text-slate-900">Actividad reciente</h2>
-        <p className="mt-0.5 text-sm text-slate-500">
-          Últimos movimientos del {tanqueNombre.toLowerCase()}
-        </p>
+        <h2 className="text-base font-bold text-slate-900">Actividad Reciente</h2>
       </div>
 
       {items.length === 0 ? (

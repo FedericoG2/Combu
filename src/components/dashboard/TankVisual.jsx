@@ -1,26 +1,68 @@
-export default function TankVisual({ percentage, className = '' }) {
+function formatLiters(value) {
+  return new Intl.NumberFormat('es-AR', { maximumFractionDigits: 0 }).format(Number(value))
+}
+
+function getFillGradient(percentage) {
+  if (percentage > 50) return 'from-emerald-800 via-emerald-600 to-emerald-400'
+  if (percentage >= 20) return 'from-amber-800 via-amber-500 to-amber-400'
+  return 'from-red-800 via-red-600 to-red-400'
+}
+
+function markStyle(mark) {
+  if (mark === 1) return { top: 0 }
+  if (mark === 0) return { bottom: 0 }
+  return { top: `${(1 - mark) * 100}%`, transform: 'translateY(-50%)' }
+}
+
+export default function TankVisual({ percentage, capacity = 0, className = '' }) {
   const fill = Math.min(Math.max(percentage, 0), 100)
+  const marks = [0, 0.25, 0.5, 0.75, 1]
+  const bodyClass = 'relative -mt-1.5 h-40 overflow-hidden rounded-2xl border-2 border-slate-300/80 bg-white sm:h-44'
 
   return (
-    <div
-      className={`relative mx-auto w-36 shrink-0 sm:w-44 ${className}`}
-      aria-hidden
-    >
-      {/* Tapa superior */}
-      <div className="mx-2 h-3 rounded-[50%] border border-slate-300/90 bg-gradient-to-b from-slate-100 to-slate-200 shadow-sm" />
+    <div className={`flex items-end gap-1.5 ${className}`} aria-hidden>
+      <div className="w-[7.5rem] shrink-0 sm:w-[8.5rem]">
+        <div className="mx-2 h-3 rounded-[50%] border border-slate-300/90 bg-white shadow-sm" />
 
-      {/* Cuerpo del tanque */}
-      <div className="relative -mt-1.5 h-44 overflow-hidden rounded-2xl border-2 border-slate-300/80 bg-gradient-to-b from-slate-100 to-slate-50 shadow-[inset_0_2px_8px_rgba(15,23,42,0.06)] sm:h-48">
-        <div
-          className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-brand-800 via-brand-600 to-brand-400 transition-all duration-700 ease-out"
-          style={{ height: `${fill}%` }}
-        />
-        <div className="pointer-events-none absolute inset-y-3 left-2 w-3 rounded-full bg-white/25" />
-        <div className="pointer-events-none absolute inset-x-4 bottom-2 h-px bg-white/20" />
+        <div className={bodyClass}>
+          <div
+            className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t transition-all duration-700 ease-out ${getFillGradient(fill)}`}
+            style={{ height: `${fill}%` }}
+          />
+
+          <div className="pointer-events-none absolute inset-x-0 top-3 bottom-3">
+            {marks.map((mark) => (
+              <div
+                key={mark}
+                className="absolute inset-x-2"
+                style={markStyle(mark)}
+              >
+                <div className="h-px bg-slate-400/45" />
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="mx-3 -mt-1 h-2 rounded-[50%] border border-slate-300/70 bg-white" />
       </div>
 
-      {/* Base */}
-      <div className="mx-3 -mt-1 h-2 rounded-[50%] border border-slate-300/70 bg-slate-200/80" />
+      <div className="relative mb-2 h-40 w-10 shrink-0 sm:h-44">
+        {marks.map((mark) => (
+          <span
+            key={mark}
+            className="absolute right-0 text-[10px] font-bold tabular-nums text-slate-900 sm:text-[11px]"
+            style={markStyle(mark)}
+          >
+            {formatLiters(capacity * mark)}
+          </span>
+        ))}
+      </div>
     </div>
   )
+}
+
+export function getLevelTextColor(percentage) {
+  if (percentage > 50) return 'text-emerald-700'
+  if (percentage >= 20) return 'text-amber-600'
+  return 'text-red-600'
 }
