@@ -1,11 +1,17 @@
-import { useMemo } from 'react'
-import { ExternalLink } from 'lucide-react'
+import { useState, useMemo } from 'react'
+import { ExternalLink, Plus } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ConsumosTable from '../components/consumos/ConsumosTable'
 import PageHeader from '../components/ui/PageHeader'
 import { mockConsumos } from '../data'
+import Button from '../components/ui/Button'
+import Modal from '../components/ui/Modal'
+import ConsumoForm from '../components/consumos/ConsumoForm'
 
 export default function DespachosPage() {
+  // 1. Estado para controlar si el Modal está abierto o cerrado
+  const [modalOpen, setModalOpen] = useState(false)
+
   const consumos = useMemo(
     () =>
       [...mockConsumos].sort(
@@ -14,15 +20,35 @@ export default function DespachosPage() {
     [],
   )
 
+  // 2. Handlers para las acciones del modal y del formulario
+  const handleRegistrarCarga = (datosCarga) => {
+    console.log('Carga registrada:', datosCarga)
+    // TODO: Guardar en backend o actualizar lista de consumos
+    setModalOpen(false) // Cerramos el modal tras guardar
+  }
+
+  const handleCancelar = () => {
+    setModalOpen(false) // Cerramos el modal
+  }
+
   return (
     <div className="space-y-6">
       <PageHeader
         title="Consumos"
-        description="Historial de cargas registradas por pilotos en el aeródromo"
-      />
+        description="Historial de consumos registrados por pilotos en el aeródromo."
+      >
+        <Button
+          type="button"
+          className="gap-2"
+          onClick={() => setModalOpen(true)}
+        >
+          <Plus className="h-4 w-4" strokeWidth={2} aria-hidden />
+          Nuevo consumo
+        </Button>
+      </PageHeader>
 
       <div className="flex items-center justify-between gap-4 rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-sm text-slate-600">
-        <p>Los consumos se registran desde el formulario público del piloto.</p>
+        <p>(cambiar)Los consumos se registran desde el formulario público del piloto.</p>
         <Link
           to="/registro"
           target="_blank"
@@ -35,6 +61,19 @@ export default function DespachosPage() {
       </div>
 
       <ConsumosTable items={consumos} />
+
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Nuevo Consumo"
+        description="Completá los datos del ingreso de combustible"
+      >
+        <ConsumoForm
+          tanqueNombre="Tanque principal"
+          onSubmit={handleRegistrarCarga}
+          onCancel={handleCancelar}
+        />
+      </Modal>
     </div>
   )
 }
