@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react'
-import { Plus } from 'lucide-react'
+import { Fuel, Plus } from 'lucide-react'
 import AbastecimientoForm from '../components/abastecimientos/AbastecimientoForm'
 import AbastecimientosTable from '../components/abastecimientos/AbastecimientosTable'
 import Button from '../components/ui/Button'
@@ -38,6 +38,7 @@ export default function AbastecimientosPage() {
         onClose={() => setModalOpen(false)}
         title="Nuevo abastecimiento"
         description="Completá los datos del ingreso de combustible"
+        icon={<Fuel className="h-5 w-5 text-white" aria-hidden />}
       >
         <AbastecimientoForm
           tanqueNombre={tanquePrincipal.nombre}

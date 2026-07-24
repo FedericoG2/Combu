@@ -5,7 +5,7 @@ import AdminLayout from './components/layout/AdminLayout'
 import LoginPage from './pages/LoginPage'
 import DashboardPage from './pages/DashboardPage'
 import AbastecimientosPage from './pages/AbastecimientosPage'
-import DespachosPage from './pages/DespachosPage'
+import ConsumosPage from './pages/ConsumosPage'
 import CargaCombustiblePage from './pages/public/CargaCombustiblePage'
 
 export default function App() {
@@ -25,7 +25,7 @@ export default function App() {
           >
             <Route index element={<DashboardPage />} />
             <Route path="abastecimientos" element={<AbastecimientosPage />} />
-            <Route path="consumos" element={<DespachosPage />} />
+            <Route path="consumos" element={<ConsumosPage />} />
           </Route>
           <Route path="*" element={<Navigate to="/admin" replace />} />
         </Routes>

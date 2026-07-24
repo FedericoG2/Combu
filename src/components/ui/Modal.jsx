@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { X } from 'lucide-react'
 
-export default function Modal({ open, onClose, title, description, children }) {
+export default function Modal({ open, onClose, title, description, icon, children }) {
   useEffect(() => {
     if (!open) return
 
@@ -36,11 +36,18 @@ export default function Modal({ open, onClose, title, description, children }) {
         className="relative z-10 w-full max-w-lg overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-xl"
       >
         <div className="flex items-start justify-between border-b border-slate-100 px-5 py-4 sm:px-6">
-          <div>
-            <h2 id="modal-title" className="text-lg font-bold text-slate-900">
-              {title}
-            </h2>
-            {description && <p className="mt-1 text-sm text-slate-500">{description}</p>}
+          <div className="flex items-center gap-3">
+            {icon && (
+              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-white shadow-sm ring-1 ring-brand-600/20">
+                {icon}
+              </div>
+            )}
+            <div>
+              <h2 id="modal-title" className="text-lg font-bold text-slate-900">
+                {title}
+              </h2>
+              {description && <p className="mt-1 text-sm text-slate-500">{description}</p>}
+            </div>
           </div>
           <button
             type="button"

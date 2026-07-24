@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Fuel, Check } from 'lucide-react'
+import { Check } from 'lucide-react'
 import Button from '../ui/Button'
 import Input from '../ui/Input'
 
@@ -45,16 +45,10 @@ export default function ConsumoForm({ tanqueNombre = 'Tanque principal', onSubmi
   }
 
   return (
-    <div >
-      {/* Encabezado con Icono, Título y Subtítulo */}
-      <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-50 text-amber-600">
-          <Fuel className="h-6 w-6" />
-        </div>
-        <div>
-          <h2 className="text-lg font-bold text-slate-800">Carga de Combustible</h2>
-          <p className="text-sm font-medium text-slate-500">{tanqueNombre}</p>
-        </div>
+    <div>
+      {/* Encabezado con Título y subtítulo; el icono se muestra en el Modal */}
+      <div className="mb-6">
+        <p className="text-sm font-medium text-slate-500">{tanqueNombre}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">

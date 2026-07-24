@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { ExternalLink, Plus } from 'lucide-react'
+import { ExternalLink, Fuel, Plus } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import ConsumosTable from '../components/consumos/ConsumosTable'
 import PageHeader from '../components/ui/PageHeader'
@@ -8,7 +8,7 @@ import Button from '../components/ui/Button'
 import Modal from '../components/ui/Modal'
 import ConsumoForm from '../components/consumos/ConsumoForm'
 
-export default function DespachosPage() {
+export default function ConsumosPage() {
   // 1. Estado para controlar si el Modal está abierto o cerrado
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -65,8 +65,9 @@ export default function DespachosPage() {
       <Modal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        title="Nuevo Consumo"
-        description="Completá los datos del ingreso de combustible"
+        title="Nuevo Consumo de combustible"
+        description="Completá los datos del consumo de combustible."
+        icon={<Fuel className="h-5 w-5 text-white" aria-hidden />}
       >
         <ConsumoForm
           tanqueNombre="Tanque principal"
